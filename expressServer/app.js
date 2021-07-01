@@ -13,6 +13,7 @@ app.get('/', function(req, res) {
   knex
     .select('*')
     .from('todolist')
+    .orderBy('category', 'asc')
     .then(data => res.status(200).json(data))
     .catch(err =>
       res.status(404).json({
@@ -24,7 +25,7 @@ app.get('/', function(req, res) {
 
 app.post('/', function (req, res) {
     knex('todolist')
-    .insert({title: req.body.title})
+    .insert({title: req.body.title, category: req.body.category, date: req.body.date})
     .then(data => res.status(200).json(data))
     .catch(err =>
       res.status(404).json({
